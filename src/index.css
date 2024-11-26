@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar__item::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, #4708c6, #ab41f7);
+  opacity: 0;
+  transform: scaleX(0);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.navbar__item:hover::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+.user__input:focus {
+  padding: 4px;
+  outline: none; /* Elimina el borde de enfoque predeterminado */
+  border-radius: 8px;
+
+  border-color: linear-gradient(
+    135deg,
+    #4708c6,
+    #ab41f7
+  ); /* Cambia el color del borde */
+  box-shadow: 0 0 5px #6a0dad; /* Añade un efecto de resplandor */
+}
+/* Cambiar el estilo de las opciones cuando están seleccionadas */
+.activo__select {
+  border-radius: 16px;
+  padding: 8px;
+  background: linear-gradient(
+    135deg,
+    #4708c6,
+    #ab41f7
+  ); /* Cambia el color del borde */ /* Fondo del dropdown */
+}
+.activo__select option {
+  background: #4708c6; /* Cambia el color del borde */ /* Fondo del dropdown */
+}
+.activo__select:focus {
+  outline: none; /* Elimina el borde predeterminado de enfoque */
+}
+
+/* Estilo del contenedor */
+.analisis__custom-file-upload {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo del botón personalizado */
+.analisis__upload-button {
+  background: linear-gradient(135deg, #4708c6, #ab41f7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* Estilo para el texto del archivo seleccionado */
+#analisis__file-chosen {
+  color: white;
+}
