@@ -20,6 +20,17 @@ export class AxiosHftHttpApi extends AbstractHttpClient implements HftHttpApi {
     return response.data;
   }
 
+  async createInitialBalance(balance: number): Promise<void> {
+    return this.api.post("/balance", { initialBalance: balance });
+  }
+
+  async addHolding(activeSymbol: string, quantity: number): Promise<void> {
+    return this.api.post("/balance/add-holdings", {
+      activeSymbol,
+      totalStocks: quantity,
+    });
+  }
+
   async register(name: string, email: string, password: string) {
     await this.api.post("/auth/register", { name, email, password });
   }
