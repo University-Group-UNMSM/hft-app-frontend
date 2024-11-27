@@ -13,6 +13,8 @@ import Usuario from "./routes/usuario";
 import Activo from "./routes/activo";
 import Analisis from "./routes/analisis";
 import Registro from "./routes/registro";
+import Login from "./routes/login";
+import Register from "./routes/register";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
         element: <Registro />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />, // Ruta independiente para login
+  },
+  {
+    path: "/register",
+    element: <Register />, // Asegúrate de tener este componente
   },
 ]);
 createRoot(document.getElementById("root")!).render(
