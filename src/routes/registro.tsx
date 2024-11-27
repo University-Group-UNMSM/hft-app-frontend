@@ -1,7 +1,24 @@
+import { useEffect, useState } from "react";
+import { AxiosHftHttpApi } from "../services/clients/AxiosHftHttpApi";
+import { Operation } from "../services/types/Operation";
+
+const hftHttpClient = new AxiosHftHttpApi(import.meta.env.VITE_API_URL);
+
 function Registro() {
+  const [operations, setOperations] = useState<Operation[]>([]);
+
+  useEffect(() => {
+    hftHttpClient
+      .getOperationsHistory("f1c20422-47b5-4207-9c9c-479a0286e6d6")
+      .then((data) => {
+        setOperations(data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
-    <div className='flex flex-col gap-6'>
-      <h2 className='text-4xl font-bold text-center'>
+    <div className="flex flex-col gap-6">
+      <h2 className="text-4xl font-bold text-center">
         Registro de Operaciones
       </h2>
       <div>
@@ -14,19 +31,20 @@ function Registro() {
               <th style={tableHeaderStyle}>Cantidad</th>
             </tr>
           </thead>
-          <tbody id='registroOperaciones'>
-            <tr>
-              <td style={tableCellStyle}>12/12/2021</td>
-              <td style={tableCellStyle}>Compra</td>
-              <td style={tableCellStyle}>APPL</td>
-              <td style={tableCellStyle}>10</td>
-            </tr>
-            <tr>
-              <td style={tableCellStyle}>12/12/2021</td>
-              <td style={tableCellStyle}>Venta</td>
-              <td style={tableCellStyle}>ETH</td>
-              <td style={tableCellStyle}>5</td>
-            </tr>
+          <tbody id="registroOperaciones">
+            {Boolean(operations.length) &&
+              operations.map((operation) => (
+                <tr key={operation.timestamp}>
+                  <td style={tableCellStyle}>
+                    {new Date(operation.timestamp).toLocaleString()}
+                  </td>
+                  <td style={tableCellStyle}>
+                    {operation.action === "buy" ? "COMPRA" : "VENTA"}
+                  </td>
+                  <td style={tableCellStyle}>{operation.activeSymbol}</td>
+                  <td style={tableCellStyle}>{operation.quantity}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

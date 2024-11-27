@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true, // Esta opción hace que sea la ruta predeterminada
-        element: <Navigate to='/usuario' replace />,
+        element: <Navigate to="/login" replace />,
       },
       {
         path: "/usuario",
