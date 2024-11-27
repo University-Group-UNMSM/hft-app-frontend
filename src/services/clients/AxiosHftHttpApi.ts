@@ -15,4 +15,18 @@ export class AxiosHftHttpApi extends AbstractHttpClient implements HftHttpApi {
     ).data;
     return response.data;
   }
+
+  async register(name: string, email: string, password: string) {
+    await this.api.post("/auth/register", { name, email, password });
+  }
+
+  async login(email: string, password: string) {
+    const response = (
+      await this.api.post<{ token: string }>("/auth/login", {
+        email,
+        password,
+      })
+    ).data;
+    return response.token;
+  }
 }
