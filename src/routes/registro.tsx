@@ -9,7 +9,7 @@ function Registro() {
 
   useEffect(() => {
     hftHttpClient
-      .getOperationsHistory("f1c20422-47b5-4207-9c9c-479a0286e6d6")
+      .getOperationsHistory()
       .then((data) => {
         setOperations(data);
       })

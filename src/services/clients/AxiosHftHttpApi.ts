@@ -5,12 +5,16 @@ import { AbstractHttpClient } from "./AbstractHttpClient";
 export class AxiosHftHttpApi extends AbstractHttpClient implements HftHttpApi {
   constructor(url: string) {
     super({ baseUrl: url });
+
+    this.api.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("token")}`;
   }
 
-  async getOperationsHistory(userId: string) {
+  async getOperationsHistory() {
     const response = (
       await this.api.get<{ code: number; data: Operation[] }>(
-        `/operations/history/${userId}`
+        `/operations/history/000`
       )
     ).data;
     return response.data;
